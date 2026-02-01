@@ -7,39 +7,9 @@ import ProductCounter from './components/ProductCounter';
 export default function App() {
   return (
     <Routes>
-      <Route path="products" element={<ProductList />} />
       <Route path="products/:id" element={<ProductDetail />} />
       <Route path="*" element={<NoMatch />} />
     </Routes>
-  );
-}
-
-function ProductList() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products`
-      );
-      const data = await response.json();
-      setProducts(data);
-    };
-
-    fetchData();
-  }, []);
-
-  return (
-    <div>
-      <h2 className="text-center">상품 목록</h2>
-      <ul className="grid grid-cols-3 gap-8">
-        {products.map((product: Product) => (
-          <Link to={`/products/${product.id}`} key={product.id}>
-            <ProductCard title={product.title} image={product.image} />
-          </Link>
-        ))}
-      </ul>
-    </div>
   );
 }
 
