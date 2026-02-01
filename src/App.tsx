@@ -37,7 +37,7 @@ function ProductList() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${import.meta.env.NEXT_PUBLIC_API_BASE_URL}/products`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products`
       );
       const data = await response.json();
       setProducts(data);
@@ -67,7 +67,7 @@ function ProductDetail() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${import.meta.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`
       );
       const data = await response.json();
       setProduct(data);
