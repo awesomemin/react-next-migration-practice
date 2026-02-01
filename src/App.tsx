@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import { Routes, Route, Outlet, Link, useParams } from 'react-router-dom'
-import { Product } from './types'
-import ProductCard from './components/ProductCard'
-import NavigationBar from './components/NavigationBar'
-import ProductCounter from './components/ProductCounter'
+import { useEffect, useState } from 'react';
+import { Routes, Route, Outlet, Link, useParams } from 'react-router-dom';
+import { Product } from './types';
+import ProductCard from './components/ProductCard';
+import NavigationBar from './components/NavigationBar';
+import ProductCounter from './components/ProductCounter';
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
-  )
+  );
 }
 
 function Layout() {
@@ -24,27 +24,27 @@ function Layout() {
       <NavigationBar />
       <Outlet />
     </div>
-  )
+  );
 }
 
 function Home() {
-  return <h1>Home</h1>
+  return <h1>Home</h1>;
 }
 
 function ProductList() {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/products`
-      )
-      const data = await response.json()
-      setProducts(data)
-    }
+        `${import.meta.env.NEXT_PUBLIC_API_BASE_URL}/products`
+      );
+      const data = await response.json();
+      setProducts(data);
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -57,24 +57,24 @@ function ProductList() {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 function ProductDetail() {
-  const { id } = useParams()
-  const [product, setProduct] = useState<Product>()
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/products/${id}`
-      )
-      const data = await response.json()
-      setProduct(data)
-    }
+        `${import.meta.env.NEXT_PUBLIC_API_BASE_URL}/products/${id}`
+      );
+      const data = await response.json();
+      setProduct(data);
+    };
 
-    fetchData()
-  }, [id])
+    fetchData();
+  }, [id]);
 
   return (
     <div>
@@ -88,7 +88,7 @@ function ProductDetail() {
       )}
       {product && <ProductCounter />}
     </div>
-  )
+  );
 }
 
 function NoMatch() {
@@ -99,5 +99,5 @@ function NoMatch() {
         <Link to="/">홈으로 이동</Link>
       </p>
     </div>
-  )
+  );
 }
